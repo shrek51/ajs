@@ -3,37 +3,70 @@
         <title>Program 2</title>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     </head>
-    <body ng-app="prg2">
-        <h1>Shopping List</h1>
+    <body ng-app="myApp2">
+        <h1>Shopping Application</h1>
+        <h4>List Of Items</h4>
+        <div ng-controller="Shopping">
         <ol>
-            <li>Mango</li>
-            <li>Banana</li>
-            <li>Juice</li>
+            <li ng-repeat="item in Shoppingitems">{{item}}</li>
         </ol>
-        <div ng-controller="Shopping"></div>
-        Enter an item to add item: <input type="text" id="textbox1">
-        <input type="button" value="Add" ng-click="addItem()"></br></br>
-        Select item to remove:
-        <select> 
-            <option>Mango</option>
-            <option>Banana</option>
-            <option>Juice</option>
-        </select><input type="button" ng-click="removeItem()" value="Remove">
-        </div>    
+        <br>
+
+        Enter the items to add:<input type="text" id="item" ng-model="new_item">
+        <input type="button" value="add" ng-click="addItem()"/><br><br>
+
+        Select an item to remove:
+        <select ng-model="selected_item" id="selected_item_name" ng-options="items for items in Shoppingitems"></select>
+        <input type="button" value="remove" ng-click="removeitem()"><br><br>
+        </div>
     </body>
 </html>
 
-<script>
-    var v2 = angular.module("prg2", []);
-    v2.controller("Shopping", function($scope){
-        $scope.addItem = function(){
-            alert("Please Enter an item to add");
-            document.getElementById("textbox1").focus();
-            return false;
-        }
-        
-        $scope.removeItem = function(){
-            alert("Select an item to cover")
-        }
-    });
-</script>
+        <script>
+            var v2=angular.module("myApp2",[]);
+            v2.controller("Shopping",function($scope){
+                $scope.Shoppingitems=["Rice","Sugar"];
+
+                $scope.addItem= function(){
+                    if($scope.new_item && $scope.Shoppingitems.indexOf($scope.new_item)== -1){
+                        $scope.Shoppingitems.push($scope.new_item);
+                        $scope.new_item=""
+                    }
+
+                    else{
+                        if($scope.new_item)
+                        {
+                            alert("This item already exists in your Shopping List");
+                            document.getElementById("item").focus();
+                            return false;
+                            
+                            
+                        }
+                        else
+                        {
+                            alert("Please enter an item to add");  
+                            document.getElementById("item").focus();
+                            return false;
+
+                        }
+                        document.getElementById("item").focus();
+                        return false;
+                    }
+                }
+                $scope.removeitem= function(){
+                    if($scope.Shoppingitems.indexOf($scope.selected_item)== -1)
+                    {
+                        alert("Please select an item to remove");
+                        
+                    }
+                    else
+                    {
+                        var idx=$scope.Shoppingitems.indexOf($scope.selected_item);
+                        $scope.Shoppingitems.splice(idx,1);
+                        $scope.selected_item_name=""
+                    }
+                    }
+                });
+
+            
+        </script>
