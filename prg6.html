@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <title>program 6 (to-do list)</title>
+        <script src="angular.js"></script>
+    </head>
+    <body ng-app="myApp6">
+        <h1>To-do list application</h1>
+        <div ng-controller="TaskController">
+            Enter a task : 
+            <input type="text" id="tsk" style="font-family:verdana;font-size:17px;" ng-model="newTask" ng-keypress="addTask($event)"/>&emsp;
+            <ul>
+                <li ng-repeat = "task in tasks">
+                    <span ng-show = "!task.EDITING">{{task.TITLE}}</span>
+                    <input ng-show = "task.EDITING" ng-model ="task.TITLE" ng-blur="turnOffEditing(task)"/>&emsp;
+                    <input type="button" value="Edit" ng-click="editTask(task)"/>&emsp;
+                    <input type="button" value="Delete" ng-click="deleteTask(task)"/>
+                </li>
+            </ul>
+    </div>
+    </body>
+</html>
+
+<script type="text/javascript">
+    var taskops = angular.module("myApp6",[]);
+    taskops.controller("TaskController",function($scope){
+
+        $scope.tasks=[
+            {"TITLE":"Brush my teeth","COMPLETED" : true, "EDITING": false},
+            {"TITLE":"Have coffee","COMPLETED" : true, "EDITING": false}
+        ];
+
+        //function to add new task
+        $scope.addTask = function(keyEvent){
+            if(keyEvent.which == 13){
+                if($scope.newTask){
+                    var t = {
+                        "TITLE" : $scope.newTask,
+                        "COMPLETED" : false,
+                        "EDITING" : false
+                    }
+                    $scope.tasks.push(t);
+                }
+                else{
+                    alert("Please enter a task to add");
+                    document.getElenetBYID("tsk").focus();
+                    return fase;
+                }
+            }
+        }
+
+        //function to edit a task
+        $scope.editTask = function(task){
+            task.EDITING = true;
+        }
+        $scope.turnOffEditing = function(task){
+            task.EDITING = false;
+        }
+
+        //function to delete/remove task
+        $scope.deleteTask = function(task){
+            var doublecheck = confirm("Are you sure you want to remove this task ? ");
+            if(doublecheck == true){
+                var idx = $scope.tasks.indexOf(task);
+                $scope.tasks.splice(idx,1);
+            }
+            else{
+                alert("You chose not to remove this task");
+            }
+        }
+    });
+</script>

@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Program 2</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-app="prg2">
+        <h1>Shopping List</h1>
+        <ol>
+            <li>Mango</li>
+            <li>Banana</li>
+            <li>Juice</li>
+        </ol>
+        <div ng-controller="Shopping"></div>
+        Enter an item to add item: <input type="text" id="textbox1">
+        <input type="button" value="Add" ng-click="addItem()"></br></br>
+        Select item to remove:
+        <select> 
+            <option>Mango</option>
+            <option>Banana</option>
+            <option>Juice</option>
+        </select><input type="button" ng-click="removeItem()" value="Remove">
+        </div>    
+    </body>
+</html>
+
+<script>
+    var v2 = angular.module("prg2", []);
+    v2.controller("Shopping", function($scope){
+        $scope.addItem = function(){
+            alert("Please Enter an item to add");
+            document.getElementById("textbox1").focus();
+            return false;
+        }
+        
+        $scope.removeItem = function(){
+            alert("Select an item to cover")
+        }
+    });
+</script>

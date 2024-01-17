@@ -1,0 +1,91 @@
+<html>
+    <head>
+        <title>Program 3</title>
+    <script src="angular.js"></script>    
+    </head>
+    <body ng-app="myApp3">
+        <h3>Simple Calculator in Angular JS</h3>
+        <div ng-controller="SimpCalculator">
+            <input type="number" id="num1" ng-model="number1" autofocus placeholder="Enter 1st number"/><br/><br/>
+            <input type="number" ng-model="number2" id="num2" placeholder="Enter the 2nd Number"/><br/><br/>
+            <select id="chosenop" ng-model="operator">
+                <option value="">Select an arith operation</option>
+                <option value="+">Add</option>
+                <option value="-">Sub</option>
+                <option value="*">Mul</option>
+                <option value="/">Div</option>
+            </select><br/><br/>
+
+            <input type="button" value="Calculate" ng-click="calculate()"/><br/><br/>
+
+            <p id="res">
+                {{ number1 + " " + operator + " " + number2 + " = " + result }}
+            </p>
+        </div>
+    </body>
+</html>
+
+<script>
+    var simple = angular.module("myApp3", []);
+    simple.controller("SimpCalculator", function($scope)
+    {
+        $scope.result = 0;
+        $scope.calculate = function()
+        {
+            if(document.getElementById("num1").value==""){
+                alert("You have to enter the 1st number");
+                document.getElementById("num1").focus();
+                return false;
+            }
+
+            else if(document.getElementById("num2").value==""){
+                alert("You have to enter the 2nd number");
+                document.getElementById("num2").focus();
+                return false;
+            }
+
+            if(document.getElementById("chosenop").value==""){
+                alert("You have to select an arithmetic operation");
+                document.getElementById("chosenop").focus();
+                return false;
+            }
+            else
+            {
+                switch($scope.operator)
+                {
+                    case '+' : $scope.result = (parseFloat($scope.number1) + parseFloat($scope.number2)).toFixed(4);
+                    document.getElementById("res").style.display="block";
+                    document.getElementById("res").value = $scope.result;
+                    break;
+
+                    case '-' : $scope.result = (parseFloat($scope.number1) - parseFloat($scope.number2)).toFixed(4);
+                    document.getElementById("res").style.display="block";
+                    document.getElementById("res").value = $scope.result;
+                    break;
+
+                    case '*' : $scope.result = (parseFloat($scope.number1) * parseFloat($scope.number2)).toFixed(4);
+                    document.getElementById("res").style.display="block";
+                    document.getElementById("res").value = $scope.result;
+                    break;
+
+                    case '/' :  if($scope.number2==0)
+                                {
+                                    alert("Please input a non-zero denominator")
+                                    document.getElementById("num2").focus();
+                                    return false;
+                                }
+
+                                else
+                                {
+                                    $scope.result = (parseFloat($scope.number1) / parseFloat($scope.number2)).toFixed(4);
+                                    document.getElementById("res").style.display="block";
+                                    document.getElementById("res").value = $scope.result;
+                                    break;
+                                }     
+                }
+            }
+        }
+    }
+    ); 
+        
+</script>
