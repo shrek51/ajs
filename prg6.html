@@ -7,7 +7,7 @@
         <h1>To-do list application</h1>
         <div ng-controller="TaskController">
             Enter a task : 
-            <input type="text" id="tsk" style="font-family:verdana;font-size:17px;" ng-model="newTask" ng-keypress="addTask($event)"/>&emsp;
+            <input type="text" id="tsk" ng-model="newTask" ng-keypress="addTask($event)"/>&emsp;
             <ul>
                 <li ng-repeat = "task in tasks">
                     <span ng-show = "!task.EDITING">{{task.TITLE}}</span>
