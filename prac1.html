@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>prg1</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp">
+        <h1>Display Full Name in AngularJS</h1>
+        <div ng-controller="myCntrl">
+            Enter First Name:<input type="text" ng-model="fn"><br/><br/>
+            Enter Second Name:<input type="text" ng-model="ln"><br/><br/>
+            My Full Name is: {{fn + " " + ln}}
+        </div>
+    </body>
+</html>
+<script>
+    var myVar = angular.module("myApp", []);
+    myVar.controller("myCntrl", function($scope){
+        $scope.fn = "Virat";
+        $scope.ln = "Kohli";
+    })
+</script>

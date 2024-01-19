@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>prg4</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp">
+        <h1>Simple Calculator</h1>
+        <div ng-controller="myCntrl">
+            <input type="number" placeholder="Enter 1st Number" ng-model="number1" id="num1"/><br/><br/>
+            <input type="number" placeholder="Enter 2nd Number" ng-model="number2" id="num2"/><br/><br/>
+
+            <select ng-model="operator" id="chosenop">
+                <option value="">Select Operation</option>
+                <option value="+">Add</option>
+                <option value="-">Sub</option>
+                <option value="*">Mul</option>
+                <option value="/">Div</option>
+            </select><br><br>
+
+            <input type="button" value="Calculate" ng-click="calculate()"><br/><br/>
+            <p id="res">
+                {{number1 + " " + operator + " " + number2 + " = " + result}}
+            </p>
+        </div>
+    </body>
+</html>
+
+<script>
+    var myVar = angular.module("myApp", []);
+    myVar.controller("myCntrl", function($scope){
+        $scope.number1="";
+        $scope.result = 0;
+
+        $scope.calculate = function(){
+            if($scope.number1==""){
+                alert("Please Enter 1st Number");
+                document.getElementById("num1").focus();
+                return false;
+            }
+            else if(document.getElementById("num2").value==""){
+                alert("Please Enter 2nd Number");
+                document.getElementById("num2").focus();
+                return false;
+            }
+            else if(document.getElementById("chosenop").value==""){
+                alert("Please Enter Operation");
+                document.getElementById("chosenop").focus();
+                return false;
+            }
+            else{
+                switch($scope.operator){
+                    case "+": $scope.result = (parseFloat($scope.number1) + parseFloat($scope.number2)).toFixed(4);
+                    document.getElementById("res").value = $scope.result;
+                    break;
+
+                    case "-": $scope.result = (parseFloat($scope.number1) - parseFloat($scope.number2)).toFixed(4);
+                    document.getElementById("res").value = $scope.result;
+                    break;
+
+                    case "*": $scope.result = (parseFloat($scope.number1) * parseFloat($scope.number2)).toFixed(4);
+                    document.getElementById("res").value = $scope.result;
+                    break;
+
+                    case "/": if($scope.number2==0){
+                        alert("Please input a non-zero denominator.")
+                        document.getElementById("num2").focus();
+                        return false;
+                    }
+                    else{
+                        $scope.result = (parseFloat($scope.number1) / parseFloat($scope.number2)).toFixed(4);
+                        document.getElementById("res").value = $scope.result;
+                        break;
+                    }
+                }
+            }
+            
+        }
+    });
+</script>

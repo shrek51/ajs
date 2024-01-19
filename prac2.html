@@ -1,0 +1,56 @@
+<html>
+    <head>
+        <title>prg2</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    </head>
+    <body ng-app="myApp">
+        <h1>Shopping List</h1>
+        <h4>List of items</h4>
+        <div ng-controller="myCntrl">
+            <ol>
+                <li ng-repeat="item in Shoppingitems">{{item}}</li>
+            </ol><br/>
+            Enter the item to add:<input type="text" id="item" ng-model="new_item"/>
+            <input type="button" value="Add" ng-click="addItem()"/><br/><br/>
+            Select an item to remove:
+            <select ng-model="selected_item" id="selected_item_name" ng-options="items for items in Shoppingitems"></select>
+            <input type="button" value="Remove" ng-click="removeItem()"/><br><br>
+        </div>
+    </body>
+</html>
+<script>
+    var myVar = angular.module("myApp", []);
+    myVar.controller("myCntrl", function($scope){
+        
+        $scope.Shoppingitems=["Rice", "Sugar"];
+
+        $scope.addItem = function(){
+            if($scope.new_item && $scope.Shoppingitems.indexOf($scope.new_item) == -1){
+                $scope.Shoppingitems.push($scope.new_item);
+                $scope.new_item="";
+            }
+            else{
+                if($scope.new_item){
+                    alert("This item already exists in your Shopping List");
+                    document.getElementById("item").focus();
+                    return false;
+                }
+                else{
+                    alert("Please Enter an Item to add");
+                    document.getElementById("item").focus();
+                    return false;
+                }
+            }
+        }
+
+        $scope.removeItem = function(){
+            if($scope.Shoppingitems.indexOf($scope.selected_item) == -1){
+                alert("Please select an item to remove");
+            }
+            else{
+                var idx = $scope.Shoppingitems.indexOf($scope.selected_item);
+                $scope.Shoppingitems.splice(idx,1);
+            }
+        }
+    })
+</script>
