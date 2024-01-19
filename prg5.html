@@ -1,21 +1,13 @@
 <html>
     <head>
         <title>Display student details</title>
-        <style type="text/css">
-            .numstuds, #genbtn
-            {
-                font-family: Verdana;
-                font-size: 17px;
-            }
-            
-        </style>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     </head>
     <body ng-app="studDetails">
         <h2>Display student details and their CGPA</h2>
 
         <div ng-controller="studDetailsCntrlr">
-            <input class="numstuds" placeholder="Enter #(students)" ng-model="num" ng-keypress="generateData($event)" />&emsp;
+            <input placeholder="Enter #(students)" ng-model="num" ng-keypress="generateData($event)" />&emsp;
             <table width="200px" border="1" ng-show="studentData.length> 0">
                 <tr>
                     <th>Sl#</th>
