@@ -7,7 +7,7 @@
     <body ng-app="myApp4">
         <h2>Calculate factorial & square of a number</h2>
         <div ng-controller="calcfactsqu">
-            <input type="text" placeholder="Enter a number" id="input" ng-model ="inpnumber" />&emsp;
+            <input type="text" autofocus placeholder="Enter a number" id="input" ng-model ="inpnumber" />&emsp;
             <input type="button" value="Calculate Factorial" ng-click="calc_fact()" />&emsp;
             <input type="button" value="Calculate Square" ng-click="calc_sqr()" />
         
@@ -29,7 +29,7 @@
             if($scope.inpnumber == "")
             {
                 alert("You have to enter a number to calculate factorial");
-                document.getElementById("inpnum").focus();
+                document.getElementById("input").focus();
                 return false;
             }
 
@@ -56,7 +56,7 @@
         $scope.calc_sqr = function(){
             if($scope.inpnumber==""){
                 alert("You have to enter a number to calculate square");
-                document.getElementById("inpnum").focus();
+                document.getElementById("input").focus();
                 return false;
             }
 
