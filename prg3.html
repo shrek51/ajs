@@ -54,17 +54,14 @@
                 switch($scope.operator)
                 {
                     case '+' : $scope.result = (parseFloat($scope.number1) + parseFloat($scope.number2)).toFixed(4);
-                    document.getElementById("res").style.display="block";
                     document.getElementById("res").value = $scope.result;
                     break;
 
                     case '-' : $scope.result = (parseFloat($scope.number1) - parseFloat($scope.number2)).toFixed(4);
-                    document.getElementById("res").style.display="block";
                     document.getElementById("res").value = $scope.result;
                     break;
 
                     case '*' : $scope.result = (parseFloat($scope.number1) * parseFloat($scope.number2)).toFixed(4);
-                    document.getElementById("res").style.display="block";
                     document.getElementById("res").value = $scope.result;
                     break;
 
@@ -78,7 +75,6 @@
                                 else
                                 {
                                     $scope.result = (parseFloat($scope.number1) / parseFloat($scope.number2)).toFixed(4);
-                                    document.getElementById("res").style.display="block";
                                     document.getElementById("res").value = $scope.result;
                                     break;
                                 }     
